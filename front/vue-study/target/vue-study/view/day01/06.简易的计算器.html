@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../../res/vue-2.4.0.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="n1">
+
+    <select v-model="opt">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+
+    <input type="text" v-model="n2">
+
+    <input type="button" value="=" @click="calc">
+
+    <input type="text" v-model="result">
+  </div>
+
+  <script>
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        n1: 0,  //初始化值
+        n2: 0,
+        result: 0,
+        opt: '+'
+      },
+      methods: {
+        calc() { // 计算器算数的方法  
+          // 逻辑：
+          /* switch (this.opt) {
+            case '+':
+              this.result = parseInt(this.n1) + parseInt(this.n2)
+              break;
+            case '-':
+              this.result = parseInt(this.n1) - parseInt(this.n2)
+              break;
+            case '*':
+              this.result = parseInt(this.n1) * parseInt(this.n2)
+              break;
+            case '/':
+              this.result = parseInt(this.n1) / parseInt(this.n2)
+              break;
+          } */
+
+          // 注意：这是投机取巧的方式，正式开发中，尽量少用
+          var codeStr = 'parseInt(this.n1) ' + this.opt + ' parseInt(this.n2)'
+          /*var codeStr = this.n1 + this.opt + this.n2*/
+          this.result = eval(codeStr)
+
+          /**
+           * eval() 函数可计算某个字符串，并执行其中的的 JavaScript 代码。
+           * 说明
+           该方法只接受原始字符串作为参数，如果 string 参数不是原始字符串，那么该方法将不作任何改变地返回。因此请不要为 eval() 函数传递 String 对象来作为参数。
+           如果试图覆盖 eval 属性或把 eval() 方法赋予另一个属性，并通过该属性调用它，则 ECMAScript 实现允许抛出一个 EvalError 异常。
+           抛出
+           如果参数中没有合法的表达式和语句，则抛出 SyntaxError 异常。
+           如果非法调用 eval()，则抛出 EvalError 异常。
+           如果传递给 eval() 的 Javascript 代码生成了一个异常，eval() 将把该异常传递给调用者。
+           */
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
