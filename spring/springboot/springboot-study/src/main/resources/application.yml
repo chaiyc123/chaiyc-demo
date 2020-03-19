@@ -1,0 +1,20 @@
+server:
+  port: 8080
+student:
+  name: 老柴aa
+  age: 27
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/springboot?characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update       #新增数据库链接必备的参数
+    show-sql: true
