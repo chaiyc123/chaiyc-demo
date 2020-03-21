@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -5,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>首页 - 兰州地铁监控系统</title>
 <link rel="icon" href="favicon.ico" type="image/ico">
-<link href="../res/lyear/css/bootstrap.min.css" rel="stylesheet">
-<link href="../res/lyear/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="../res/lyear/css/style.min.css" rel="stylesheet">
+<link href="lyear/css/bootstrap.min.css" rel="stylesheet">
+<link href="lyear/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="lyear/css/style.min.css" rel="stylesheet">
 </head>
   
 <body>
@@ -18,17 +20,17 @@
       
       <!-- logo -->
       <div id="logo" class="sidebar-header">
-        <a href="index.html"><img src="../res/lyear/images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
+        <a href="index.jsp"><img src="static/lyear/images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
       </div>
       <div class="lyear-layout-sidebar-scroll"> 
         
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
-            <li class="nav-item active"> <a href="index.html"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+            <li class="nav-item active"> <a href="index.jsp"><i class="mdi mdi-home"></i> 后台首页</a> </li>
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-palette"></i>系统管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="lyear_ui_buttons.html">用户管理</a> </li>
+                <li> <a href="/list">用户管理</a> </li>
                 <li> <a href="lyear_ui_cards.html">角色管理</a> </li>
                 <li> <a href="lyear_ui_grid.html">权限管理</a> </li>
               </ul>
@@ -36,7 +38,7 @@
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i>数据管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="data/data.jsp">监管数据</a> </li>
+                <li> <a href="/findStudent">监管数据</a> </li>
               </ul>
             </li>
           </ul>
@@ -424,13 +426,13 @@
   </div>
 </div>
 
-<script type="text/javascript" src="../res/lyear/js/jquery.min.js"></script>
-<script type="text/javascript" src="../res/lyear/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../res/lyear/js/perfect-scrollbar.min.js"></script>
-<script type="text/javascript" src="../res/lyear/js/main.min.js"></script>
+<script type="text/javascript" src="lyear/js/jquery.min.js"></script>
+<script type="text/javascript" src="lyear/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lyear/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="lyear/js/main.min.js"></script>
 
 <!--图表插件-->
-<script type="text/javascript" src="../res/lyear/js/Chart.js"></script>
+<script type="text/javascript" src="lyear/js/Chart.js"></script>
 <script type="text/javascript">
 $(document).ready(function(e) {
     var $dashChartBarsCnt  = jQuery( '.js-chartjs-bars' )[0].getContext( '2d' ),

@@ -1,7 +1,7 @@
-package com.chaiyc.springboot.controller;
+package com.chaiyc.springboot.controller.study;
 
-import com.chaiyc.springboot.mapper.StudentMapper;
-import com.chaiyc.springboot.pojo.Student;
+import com.chaiyc.springboot.mapper.study.StudentMapper;
+import com.chaiyc.springboot.bean.study.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
-    StudentMapper studentMapper;
+    private StudentMapper studentMapper;
 
     @RequestMapping("/findStudent")
     public String listStudent(Model model){

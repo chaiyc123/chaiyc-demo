@@ -1,4 +1,4 @@
-package com.chaiyc.springboot.pojo.study;
+package com.chaiyc.springboot.bean.study;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

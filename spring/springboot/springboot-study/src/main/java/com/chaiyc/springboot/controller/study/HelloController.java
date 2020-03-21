@@ -1,4 +1,4 @@
-package com.chaiyc.springboot.controller;
+package com.chaiyc.springboot.controller.study;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +24,11 @@ public class HelloController {
 
         return "Hello SpringBoot!! 你妹的" + studentProperties.getName() + "," + studentProperties.getAge();
     }*/
+
+    @RequestMapping("/")
+    public String index(Model model){
+         return "index";
+    }
 
     @RequestMapping("/hello")
     public String hello(Model model){

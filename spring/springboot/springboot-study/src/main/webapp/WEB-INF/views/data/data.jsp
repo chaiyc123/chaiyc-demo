@@ -1,16 +1,15 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>文档列表 - 光年(Light Year Admin)后台管理系统模板</title>
+<title></title>
 <link rel="icon" href="favicon.ico" type="image/ico">
-<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
-<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
-<meta name="author" content="yinqi">
-<link href="../../res/lyear/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../res/lyear/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="../../res/lyear/css/style.min.css" rel="stylesheet">
+<link href="static/lyear/css/bootstrap.min.css" rel="stylesheet">
+<link href="static/lyear/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="static/lyear/css/style.min.css" rel="stylesheet">
 </head>
   
 <body>
@@ -21,7 +20,7 @@
        
       <!-- logo -->
       <div id="logo" class="sidebar-header">
-        <a href="index.html"><img src="../../res/lyear/images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
+        <a href="index.html"><img src="static/lyear/images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
       </div>
       <div class="lyear-layout-sidebar-scroll">
 
@@ -31,7 +30,7 @@
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-palette"></i>系统管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="lyear_ui_buttons.html">用户管理</a> </li>
+                <li> <a href="/list">用户管理</a> </li>
                 <li> <a href="lyear_ui_cards.html">角色管理</a> </li>
                 <li> <a href="lyear_ui_grid.html">权限管理</a> </li>
               </ul>
@@ -39,7 +38,7 @@
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i>数据管理</a>
               <ul class="nav nav-subnav">
-                <li> <a href="data.html">监管数据</a> </li>
+                <li> <a href="/findStudent">监管数据</a> </li>
               </ul>
             </li>
           </ul>
@@ -62,13 +61,13 @@
               <span class="lyear-toggler-bar"></span>
               <span class="lyear-toggler-bar"></span>
             </div>
-            <span class="navbar-page-title"> 示例页面 - 文档列表 </span>
+            <span class="navbar-page-title"> 数据管理 - 监管数据 </span>
           </div>
           
           <ul class="topbar-right">
             <li class="dropdown dropdown-profile">
               <a href="javascript:void(0)" data-toggle="dropdown">
-                <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="笔下光年" />
+                <img class="img-avatar img-avatar-48 m-r-10" src="static/lyear/images/users/avatar.jpg" alt="笔下光年" />
                 <span>笔下光年 <span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
@@ -266,25 +265,27 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <label class="lyear-checkbox checkbox-primary">
-                            <input type="checkbox" name="ids[]" value="1"><span></span>
-                          </label>
-                        </td>
-                        <td>1</td>
-                        <td>第01章 天涯思君不可忘</td>
-                        <td>《倚天屠龙记》</td>
-                        <td>金庸</td>
-                        <td>36</td>
-                        <td><font class="text-success">正常</font></td>
-                        <td>
-                          <div class="btn-group">
-                            <a class="btn btn-xs btn-default" href="#!" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                            <a class="btn btn-xs btn-default" href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
-                          </div>
-                        </td>
-                      </tr>
+                      <c:forEach items="${students}" var="i">
+                        <tr>
+                          <td>
+                            <label class="lyear-checkbox checkbox-primary">
+                              <input type="checkbox" name="ids[]" value="1"><span></span>
+                            </label>
+                          </td>
+                          <td>${i.id}</td>
+                          <td>${i.name}</td>
+                          <td>《倚天屠龙记》</td>
+                          <td>金庸</td>
+                          <td>36</td>
+                          <td><font class="text-success">正常</font></td>
+                          <td>
+                            <div class="btn-group">
+                              <a class="btn btn-xs btn-default" href="#!" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                              <a class="btn btn-xs btn-default" href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                            </div>
+                          </td>
+                        </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -317,10 +318,10 @@
   </div>
 </div>
 
-<script type="text/javascript" src="../../res/lyear/js/jquery.min.js"></script>
-<script type="text/javascript" src="../../res/lyear/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../res/lyear/js/perfect-scrollbar.min.js"></script>
-<script type="text/javascript" src="../../res/lyear/js/main.min.js"></script>
+<script type="text/javascript" src="lyear/js/jquery.min.js"></script>
+<script type="text/javascript" src="lyear/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lyear/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="lyear/js/main.min.js"></script>
 <script type="text/javascript">
 $(function(){
     $('.search-bar .dropdown-menu a').click(function() {
