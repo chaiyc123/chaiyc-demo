@@ -1,4 +1,4 @@
-package com.chaiyc.springboot.pojo.study;
+package com.chaiyc.springboot.bean.study;
 
 import java.util.Date;
 

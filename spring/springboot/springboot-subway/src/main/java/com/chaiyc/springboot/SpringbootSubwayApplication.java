@@ -1,0 +1,13 @@
+package com.chaiyc.springboot;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringbootSubwayApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootSubwayApplication.class, args);
+    }
+
+}
