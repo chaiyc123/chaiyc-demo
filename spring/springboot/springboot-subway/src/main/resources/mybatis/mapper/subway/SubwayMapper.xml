@@ -2,9 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chaiyc.springboot.mapper.user.UserMapper">
+<mapper namespace="com.chaiyc.springboot.mapper.subway.SubwayMapper">
 
-    <!--  -->
     <sql id="pageStart">
         select * from (
           select rownum rn_, t.* from (
@@ -26,16 +25,5 @@
     <sql id="order">
       order by id
     </sql>
-
-    <!--用户登陆-->
-    <select id="login" resultType="com.chaiyc.springboot.entities.user.User">
-        SELECT * FROM T_USER WHERE login_Account=#{username} and login_Password=#{password}
-    </select>
-
-    <select id="getUserById" resultType="com.chaiyc.springboot.entities.user.User">
-        SELECT * FROM T_USER WHERE user_acct_id=#{userAcctId}
-    </select>
-
-
 
 </mapper>

@@ -1,4 +1,4 @@
-package com.chaiyc.springboot.service.impl;
+package com.chaiyc.springboot.service.user.impl;
 
 import com.chaiyc.springboot.bean.study.Student;
 import com.chaiyc.springboot.mapper.study.StudentMapper;

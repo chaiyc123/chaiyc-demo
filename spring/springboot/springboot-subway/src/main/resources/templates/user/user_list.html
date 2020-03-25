@@ -9,6 +9,20 @@
 <link th:href="@{/asserts/css/materialdesignicons.min.css}" rel="stylesheet">
 <link th:href="@{/asserts/css/style.min.css}" rel="stylesheet">
 </head>
+
+
+<style>
+
+  th{
+    text-align: center;
+  }
+
+  /* 使 复选框居中*/
+  .lyear-checkbox span::before{
+    position: initial
+  }
+
+</style>
   
 <body>
 <div class="lyear-layout-web">
@@ -45,16 +59,16 @@
                   </div>
                 </form>
                 <div class="toolbar-btn-action">
-                  <a class="btn btn-primary m-r-5" href="#!"><i class="mdi mdi-plus"></i> 新增</a>
+                  <a class="btn btn-primary m-r-5" href="#" th:href="@{/user/edit}"><i class="mdi mdi-plus"></i> 新增</a>
                   <a class="btn btn-success m-r-5" href="#!"><i class="mdi mdi-check"></i> 启用</a>
                   <a class="btn btn-warning m-r-5" href="#!"><i class="mdi mdi-block-helper"></i> 禁用</a>
-                  <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>
+                  <a class="btn btn-danger" href="#" th:href="@{/user/deletes}"><i class="mdi mdi-window-close"></i> 删除</a>
                 </div>
               </div>
               <div class="card-body">
                 
                 <div class="table-responsive">
-                  <table class="table table-bordered">
+                  <table class="table table-bordered" style="text-align: center">
                     <thead>
                       <tr>
                         <th>
@@ -63,28 +77,27 @@
                           </label>
                         </th>
                         <th>编号</th>
-                        <th>标题</th>
-                        <th>书籍</th>
-                        <th>作者</th>
-                        <th>阅读量</th>
-                        <th>状态</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>家庭地址</th>
+                        <th>联系电话</th>
+                        <th>邮箱</th>
                         <th>操作</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach items="${lists}" var="i">
-                        <tr>
+                        <tr th:each="user:${users}">
                           <td>
                             <label class="lyear-checkbox checkbox-primary">
                               <input type="checkbox" name="ids[]" value="1"><span></span>
                             </label>
                           </td>
-                          <td>${i.id}</td>
-                          <td>${i.name}</td>
-                          <td>《倚天屠龙记》</td>
-                          <td>金庸</td>
-                          <td>36</td>
-                          <td><font class="text-success">正常</font></td>
+                          <td th:text="${userStat.index}"></td>
+                          <td th:text="${user.userName}"></td>
+                          <td th:text="${user.userSex} == 0 ? '女' : '男'"></td>
+                          <td th:text="${user.userAddress}"></td>
+                          <td th:text="${user.userTele}"></td>
+                          <td th:text="${user.userEmail}"></td>
                           <td>
                             <div class="btn-group">
                               <a class="btn btn-xs btn-default" href="#!" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
@@ -92,7 +105,6 @@
                             </div>
                           </td>
                         </tr>
-                      </c:forEach>
                     </tbody>
                   </table>
                 </div>

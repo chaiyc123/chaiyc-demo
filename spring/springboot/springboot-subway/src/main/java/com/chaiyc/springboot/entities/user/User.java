@@ -1,4 +1,4 @@
-package com.chaiyc.springboot.entities;
+package com.chaiyc.springboot.entities.user;
 
 /**
  * 用户信息实体类

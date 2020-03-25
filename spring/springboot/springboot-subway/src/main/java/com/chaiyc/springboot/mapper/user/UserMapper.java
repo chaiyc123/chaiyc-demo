@@ -1,13 +1,12 @@
 package com.chaiyc.springboot.mapper.user;
 
-import com.chaiyc.springboot.entities.User;
+import com.chaiyc.springboot.entities.user.User;
 import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-//@Mapper
+//@Mapper  启动类中配置了自动扫描
 public interface UserMapper {
 
     User getUserById();

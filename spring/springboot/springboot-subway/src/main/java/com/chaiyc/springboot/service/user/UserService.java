@@ -1,6 +1,6 @@
-package com.chaiyc.springboot.service;
+package com.chaiyc.springboot.service.user;
 
-import com.chaiyc.springboot.entities.User;
+import com.chaiyc.springboot.entities.user.User;
 
 import java.util.List;
 

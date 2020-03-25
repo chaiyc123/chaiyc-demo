@@ -1,8 +1,8 @@
-package com.chaiyc.springboot.service.impl;
+package com.chaiyc.springboot.service.user.impl;
 
-import com.chaiyc.springboot.entities.User;
+import com.chaiyc.springboot.entities.user.User;
 import com.chaiyc.springboot.mapper.user.UserMapper;
-import com.chaiyc.springboot.service.UserService;
+import com.chaiyc.springboot.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
