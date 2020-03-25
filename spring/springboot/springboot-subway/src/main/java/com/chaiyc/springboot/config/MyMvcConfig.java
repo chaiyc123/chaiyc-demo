@@ -25,7 +25,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
                 registry.addViewController("/").setViewName("login");
                 registry.addViewController("index.html").setViewName("login");
                 registry.addViewController("index").setViewName("login");
-                registry.addViewController("main.html").setViewName("main");
+                registry.addViewController("main.html").setViewName("main");  //登陆成功后重定向到这里，防止表单重复提交
             }
 
             // 注册拦截器
