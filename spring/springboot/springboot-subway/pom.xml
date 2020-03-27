@@ -44,6 +44,14 @@
             <version>2.1.2</version>
         </dependency>
 
+        <!--引入分页插件依赖-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+
+
         <!-- 因为 mybatis 下面已经整合了 jdbc 所以不需要再添加jdbc 的依赖了-->
        <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -75,6 +83,13 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>4.0.0</version>
+        </dependency>
+
+        <!-- poi处理excel -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
         </dependency>
 
         <dependency>

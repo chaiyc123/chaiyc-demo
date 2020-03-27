@@ -14,6 +14,13 @@ public interface UserMapper {
     @Select("select * from T_USER")
     List<User> getAllUser();
 
+    /**
+     * 分页查询
+     * @return
+     */
+    List<User> getPageUser();
+
+
     void saveUser(User user);
 
     void saveUpdate(User user);

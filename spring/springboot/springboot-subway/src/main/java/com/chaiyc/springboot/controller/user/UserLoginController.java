@@ -33,7 +33,7 @@ public class UserLoginController {
     @PostMapping(value = "/user/login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
-                        Map<String, String> maps, HttpSession session){
+                        Map<String, String> maps, HttpSession session)throws Exception{
 
         User user = userService.login(username,password);
 

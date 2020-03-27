@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="modal-footer no-margin-top" th:fragment="page">
+    <ul class="pagination pull-right no-margin">
+
+        <!-- 首页 -->
+        <li>
+            <a th:href="@{${url}(pageNum=0)}">首页</a>
+        </li>
+
+        <!-- 上一页 -->
+        <li th:if="${pageInfo.hasPreviousPage}">
+            <a th:href="@{${url}(pageNum=${pageInfo.prePage})}" th:text="上一页"></a>
+        </li>
+
+        <!-- 中间页 -->
+        <li th:each="pageNum:${#numbers.sequence(0, pageInfo.pages - 1)}">
+            <a th:href="@{${url}(pageNum=${pageNum + 1})}" th:text="${pageNum + 1}" th:if="${pageNum ne pageInfo.pageNum -1}"></a>
+            <a th:href="@{${url}(pageNum=${pageNum + 1})}" th:text="${pageNum + 1}" th:if="${pageNum eq pageInfo.pageNum -1}" th:style="'color:#fff; background: #2e80fc;'"></a>
+        </li>
+
+        <!-- 下一页 -->
+        <li th:if="${pageInfo.hasNextPage}">
+            <a th:href="@{${url}(pageNum=${pageInfo.nextPage})}" th:text="下一页"></a>
+        </li>
+
+        <!-- 尾页 -->
+        <li>
+            <a th:href="@{${url}(pageNum=${pageInfo.pages})}">尾页</a>
+        </li>
+
+    </ul>
+</div>
+
+</body>
+</html>

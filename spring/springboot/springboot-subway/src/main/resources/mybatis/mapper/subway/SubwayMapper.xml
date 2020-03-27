@@ -4,26 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chaiyc.springboot.mapper.subway.SubwayMapper">
 
-    <sql id="pageStart">
-        select * from (
-          select rownum rn_, t.* from (
-    </sql>
-
-    <sql id="pageEnd">
-          ) t
-        ) where rn_ &lt;= #{end} and rn_ &gt;= #{start}
-    </sql>
-
-    <sql id="whereAll">
-        <where>
-            <if test="o.id != null and o.id != ''">and id = #{o.id}</if>
-            <if test="o.ywbs != null and o.ywbs != ''">and ywbs = #{o.ywbs}</if>
-            <if test="unique != null and unique">and rownum = 1</if>
-        </where>
-    </sql>
-
-    <sql id="order">
-      order by id
-    </sql>
+    <select id="getPageSubway" resultType="com.chaiyc.springboot.entities.subway.Subway">
+        select * from T_SUBWAY
+    </select>
 
 </mapper>

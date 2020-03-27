@@ -2,6 +2,9 @@ package com.chaiyc.springboot.controller.user;
 
 import com.chaiyc.springboot.entities.user.User;
 import com.chaiyc.springboot.service.user.UserService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +28,14 @@ public class UserController {
      * @return
      */
     @GetMapping("/list")
-    public String list(Model model){
+    public String list(Model model,
+                       @RequestParam(name = "pageNum",defaultValue = "1") int pageNo,
+                       @RequestParam(name = "page.size",defaultValue = "8") int pageSize) throws  Exception{
 
-        List<User> lists = userService.getAllUser();
+        PageInfo<User> pageInfo = userService.getPageUser(pageNo,pageSize);
 
-        model.addAttribute("users",lists);
+        model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("url","/user/list");
 
         return "user/user_list";
     }
@@ -47,7 +53,7 @@ public class UserController {
      * 添加用户
      */
     @PostMapping("/save")
-    public String save(User user){
+    public String save(User user) throws  Exception {
         userService.saveUser(user);
         return "redirect:/user/list";
     }
@@ -56,7 +62,7 @@ public class UserController {
      * 修改用户
      */
     @PutMapping("/update")
-    public String update(User user){
+    public String update(User user) throws  Exception{
         userService.saveUpdate(user);
         return "redirect:/user/list";
     }
@@ -65,7 +71,7 @@ public class UserController {
      * 删除用户
      */
     @DeleteMapping("/delete")
-    public String delete(Integer id){
+    public String delete(Integer id) throws  Exception{
         userService.deleteUserById(id);
         return "redirect:/user/list";
     }
