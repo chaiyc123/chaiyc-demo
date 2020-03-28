@@ -63,6 +63,7 @@
                         </th>
                         <th>编号</th>
                         <th>姓名</th>
+                        <th>登陆账户</th>
                         <th>性别</th>
                         <th>家庭地址</th>
                         <th>联系电话</th>
@@ -79,6 +80,7 @@
                           </td>
                           <td th:text="${userStat.index}"></td>
                           <td th:text="${user.userName}"></td>
+                          <td th:text="${user.loginAccount}"></td>
                          <!-- <td th:text="${user.userSex} == 0 ? '女' : '男'"></td>-->
                           <td th:if="${user.userSex} == 0" th:text="女"></td>
                           <td th:if="${user.userSex} == 1" th:text="男"></td>
@@ -89,8 +91,9 @@
                           <td>
                             <div class="btn-group">
                               <a class="btn btn-xs btn-default" href="#!" th:href="@{/user/edit(dataId=${user.userAcctId})}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                              <a class="btn btn-xs btn-default" href="#!"  th:href="@{/user/delete(dataId=${user.userAcctId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                              <a class="btn btn-xs btn-default" href="#!" th:onclick="deleteFun([[${user.userAcctId}]])" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                             </div>
+
                           </td>
                         </tr>
                     </tbody>
@@ -125,6 +128,16 @@
           $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
       });
   });
+
+  // 单条删除
+  function deleteFun(dataId){
+    var flag = confirm("您确认要删除吗？");
+    if(flag == true){
+      window.location.href="/subway/user/delete?dataId=" + dataId ;
+    }
+  }
+
+
 
   // 批量删除
   $("#delete").on("click",function(){

@@ -108,7 +108,7 @@
                       <td>
                         <div class="btn-group">
                           <a class="btn btn-xs btn-default" href="#!" th:href="@{/subway/edit(dataId=${subway.dataId})}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                          <a class="btn btn-xs btn-default" href="#!" th:href="@{/subway/delete(dataId=${subway.dataId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                          <a class="btn btn-xs btn-default" href="#!" th:onclick="deleteFun([[${subway.dataId}]])" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                         </div>
                       </td>
                     </tr>
@@ -153,6 +153,14 @@
       var dowUrl = "/subway/subway/templateDownload";
       window.open(dowUrl);
   });
+
+  // 单条删除
+  function deleteFun(dataId){
+    var flag = confirm("您确认要删除吗？");
+    if(flag == true){
+      window.location.href="/subway/subway/delete?dataId=" + dataId ;
+    }
+  }
 
   // 批量删除
   $("#delete").on("click",function(){

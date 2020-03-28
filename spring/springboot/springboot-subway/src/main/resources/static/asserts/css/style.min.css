@@ -2490,7 +2490,11 @@ dd, dt {
 	height: -webkit-calc(100% - 68px);
 	height: calc(100% - 68px);
     position: relative;
-    background-color: #fff;
+    /*background-color: #fff;  修改默认侧边栏的背景颜色*/
+    background-color: #465161;
+    /*修改默认侧边栏的字体颜色*/
+    color: rgba(255, 255, 255, .85);
+
 }
 
 /* 侧边栏开关 */
@@ -2504,7 +2508,8 @@ dd, dt {
     display: block;
     height: 2px;
     width: 20px;
-	background-color: #4d5259;
+	/*background-color: #4d5259;*/
+    background-color: #fff;
     margin: 4px 0px;
     -webkit-transition: 0.3s;
     transition: 0.3s;
@@ -2524,7 +2529,8 @@ dd, dt {
     position: relative;
     overflow: hidden;
     z-index: 999;
-    background-color: #fff;
+    /*background-color: #fff;*/
+    background-color: #465161;
     width: 100%;
 	-webkit-box-shadow: 0 1px 1px -1px rgba(77,82,89,0.15);
     box-shadow: 0 1px 1px -1px rgba(77,82,89,0.15);
@@ -2652,7 +2658,11 @@ dd, dt {
     border-radius: 0px;
 }
 .lyear-layout-header .navbar-default {
-    background-color: transparent;
+    /*background-color: transparent;  修改默认侧边栏的背景颜色*/
+    background-color: #465161;
+    /*修改默认侧边栏的字体颜色*/
+    color: rgba(255, 255, 255, .85);
+
 }
 .topbar {
     display: -webkit-box;
