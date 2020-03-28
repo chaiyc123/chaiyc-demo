@@ -5,7 +5,17 @@
 <mapper namespace="com.chaiyc.springboot.mapper.subway.SubwayMapper">
 
     <select id="getPageSubway" resultType="com.chaiyc.springboot.entities.subway.Subway">
-        select * from T_SUBWAY
+        select * from T_SUBWAY order by createTime asc
     </select>
+
+    <select id="getQuerySubway" resultType="com.chaiyc.springboot.entities.subway.Subway">
+        select * from T_SUBWAY order by createTime desc
+    </select>
+
+    <insert id="importSubway" parameterType="com.chaiyc.springboot.entities.subway.Subway">
+        insert into T_SUBWAY(checkName,checkPhone,checkStation,remark,createTime)
+            values
+            ( #{checkName}, #{checkPhone}, #{checkStation}, #{remark}, #{createTime})
+    </insert>
 
 </mapper>

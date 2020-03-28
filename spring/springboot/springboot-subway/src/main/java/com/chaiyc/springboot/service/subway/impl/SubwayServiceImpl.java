@@ -8,6 +8,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SubwayServiceImpl implements SubwayService {
 
@@ -19,5 +21,15 @@ public class SubwayServiceImpl implements SubwayService {
     public PageInfo<Subway> getPageSubway(int pageNo, int pageSize) {
         PageHelper.startPage(pageNo,pageSize);
         return new PageInfo<Subway>(subwayMapper.getPageSubway());
+    }
+
+    @Override
+    public void importSubway(Subway subway) {
+        subwayMapper.importSubway(subway);
+    }
+
+    @Override
+    public List<Subway> getQuerySubway() {
+        return subwayMapper.getQuerySubway();
     }
 }

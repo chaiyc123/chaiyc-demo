@@ -12,7 +12,7 @@ public interface UserService {
      * 通过 id 查找 用户
      * @return
      */
-    User getUserById() throws Exception;;
+    User getUserById(String dataId) throws Exception;;
 
     /**
      * 查询所有的用户，后续改进使用分页
@@ -36,7 +36,7 @@ public interface UserService {
      * 通过id删除用户
      * @param id
      */
-    void deleteUserById(Integer id) throws Exception;;
+    void deleteUserById(String dataId) throws Exception;;
 
     /**
      * 用户登陆
@@ -47,4 +47,10 @@ public interface UserService {
     User login(String username, String password) throws Exception;;
 
     PageInfo<User> getPageUser(int pageNo, int pageSize) throws Exception;;
+
+    /**
+     * 修改用户
+     * @param user
+     */
+    void updateUser(User user);
 }

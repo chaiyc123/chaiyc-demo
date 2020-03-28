@@ -33,14 +33,31 @@
         SELECT * FROM T_USER WHERE login_Account=#{username} and login_Password=#{password}
     </select>
 
+    <!-- 通过用户id 查找用户
     <select id="getUserById" resultType="com.chaiyc.springboot.entities.user.User">
         SELECT * FROM T_USER WHERE user_acct_id=#{userAcctId}
     </select>
+    -->
 
     <!--分页查询-->
     <select id="getPageUser" resultType="com.chaiyc.springboot.entities.user.User">
-        SELECT * FROM T_USER
+        SELECT * FROM T_USER order by create_Time desc
     </select>
 
+    <insert id="saveUser" parameterType="com.chaiyc.springboot.entities.user.User">
+        insert into T_USER (user_Name,user_Sex, user_Birthday,user_Identity_Code,user_Address,
+                    user_Tele, user_Email, login_Account, login_Password, user_State, create_Time )
+            values ( #{userName}, #{userSex}, #{userBirthday}, #{userIdentityCode}, #{userAddress},
+                #{userTele}, #{userEmail}, #{loginAccount}, #{loginPassword}, #{userState},
+                #{createTime} )
+    </insert>
+
+    <update id="updateUser" parameterType="com.chaiyc.springboot.entities.user.User">
+        update T_USER set user_Name=#{userName},user_Sex=#{userSex},
+                user_Birthday=#{userBirthday},user_Identity_Code=#{userIdentityCode},user_Address=#{userAddress},
+                user_Tele=#{userTele},user_Email= #{userEmail},login_Account=#{loginAccount},
+                login_Password=#{loginPassword},user_State=#{userState},create_Time=#{createTime}
+                where USER_ACCT_ID=#{userAcctId}
+    </update>
 
 </mapper>

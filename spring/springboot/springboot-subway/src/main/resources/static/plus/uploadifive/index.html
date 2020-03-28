@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>文件上传</title>
+    <link href="uploadifive.css" rel="stylesheet" />
+
+
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="jquery.uploadifive.js"></script>
+    <style>
+        #uploadifive-file_upload {
+            background: none repeat scroll 0 0 #00b7ee;
+            border-radius: 3px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            border: none;
+            padding: 0 5px;
+        }
+
+            #uploadifive-file_upload input {
+                cursor: pointer;
+            }
+
+        .uploadDiv {
+            margin: 10px;
+            padding: 5px;
+            border: 2px dashed #cfcfcf;
+            text-align:center;
+        }
+
+            .uploadDiv .toodDiv {
+                margin-top: 5px;
+            }
+
+            .uploadDiv .upload_btn, .cancel_btn {
+                background: none repeat scroll 0 0 #00b7ee;
+                border-radius: 3px;
+                color: #fff;
+                cursor: pointer;
+                display: inline-block;
+                padding: 0 5px;
+                position: relative;
+                text-align: center;
+                font: bold 12px Arial, Helvetica, sans-serif;
+                text-shadow: 0px -1px 0px rgba(0,0,0,0.25);
+                text-transform: uppercase;
+                line-height: 30px;
+            }
+
+            .uploadDiv .cancel_btn {
+                background: none repeat scroll 0 0 #fff;
+                border: 1px solid #cfcfcf;
+                color: #565656;
+                margin-left: 5px;
+            }
+
+            .uploadDiv #uploadifive-file_upload {
+                margin: auto;
+            }
+    </style>
+
+
+    <script>
+        $(function () {
+            $('#file_upload').uploadifive({
+                'buttonText': '选择文件',                        //按钮文本
+                'queueID': 'fileQueue',                        //队列的ID
+                'queueSizeLimit': 2,                          //队列最多可上传文件数量，默认为999
+                'auto': true,                                 //如果设置为true，则文件将在添加到队列时自动上传。
+                'multi': true,                                 //是否为多选，默认为true
+                'removeCompleted': false,                       //是否完成后移除序列，默认为true
+                'fileSizeLimit': '30MB',                       //单个文件大小，0为无限制，可接受KB,MB,GB等单位的字符串值
+                'fileType': "*.xlsx;*.xls",  //上传的文件筛选后缀过滤器 如果限制图片类型可以用 image/*)
+                'uploadScript': "http://60.28.163.183:17042/file-rest/upfile?setId=ncrjhjzz&bizType=002&bizId=bizId'",  //文件上传的地址
+                'formData': {}, //传递的参数
+                //开始上传
+                "onUpload": function (file) {
+                   //开始上传事件
+                },
+                'onUploadComplete': function (file, data) {
+                    //上传结束事件
+                    $('#file_upload').uploadifive('clearQueue');
+					console.log(data);
+					var filePath = data.filePath;
+		     		console.log(filePath);
+                }
+            });
+        });
+        //开始上传
+        function StartUpload() {
+            $('#file_upload').uploadifive('upload');
+        }
+        //取消
+        function CancelUpload() {
+            $('#file_upload').uploadifive('clearQueue');
+            setTimeout(function () { $(".uploadDiv").remove(); }, 2000);
+
+        }
+    </script>
+</head>
+
+
+<body>
+    <div class="uploadDiv">
+        <input type="file" id="file_upload" name="file_upload" />
+       <!--  <div class="upload_btn" onClick="StartUpload()">开始上传</div>
+        <div class="cancel_btn" onClick="CancelUpload()">取消</div> -->
+        <div id="fileQueue" class="fileQueue"></div>
+    </div>
+</body>
+</html>

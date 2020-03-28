@@ -12,6 +12,7 @@ public class Subway {
     private String checkPhone;          //检查人电话
     private String checkStation;        //检查站点
     private String remark;              //备注
+    private String createTime;          //创建时间
 
     public Integer getDataId() {
         return dataId;
@@ -51,5 +52,13 @@ public class Subway {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }

@@ -20,9 +20,9 @@
         </li>
 
         <!-- 中间页 -->
-        <li th:each="pageNum:${#numbers.sequence(0, pageInfo.pages - 1)}">
-            <a th:href="@{${url}(pageNum=${pageNum + 1})}" th:text="${pageNum + 1}" th:if="${pageNum ne pageInfo.pageNum -1}"></a>
-            <a th:href="@{${url}(pageNum=${pageNum + 1})}" th:text="${pageNum + 1}" th:if="${pageNum eq pageInfo.pageNum -1}" th:style="'color:#fff; background: #2e80fc;'"></a>
+        <li th:each="pageNum:${#numbers.sequence((pageInfo.pageNum + 5 < pageInfo.pages)? pageInfo.pageNum : (pageInfo.pageNum < 5) ? 1 : pageInfo.pageNum, (pageInfo.pageNum + 5 < pageInfo.pages)?(pageInfo.pageNum + 5) : pageInfo.pages)}">
+            <a th:href="@{${url}(pageNum=${pageNum})}" th:text="${pageNum}" th:if="${pageNum ne pageInfo.pageNum}"></a>
+            <a th:href="@{${url}(pageNum=${pageNum})}" th:text="${pageNum}" th:if="${pageNum eq pageInfo.pageNum}" th:style="'color:#fff; background: #2e80fc;'"></a>
         </li>
 
         <!-- 下一页 -->

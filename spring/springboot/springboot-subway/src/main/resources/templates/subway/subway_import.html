@@ -1,143 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<script type="text/javascript">
-    var filee;
-    $(document).ready(function(e) {
-        $('#uploads').uploadifive({
-            'buttonText': '选择文件',                        //按钮文本
-            'queueID': 'fileQueue',                        //队列的ID
-            'queueSizeLimit': 2,                          //队列最多可上传文件数量，默认为999
-            'auto': true,                                 //如果设置为true，则文件将在添加到队列时自动上传。
-            'multi': true,                                 //是否为多选，默认为true
-            'removeCompleted': false,                       //是否完成后移除序列，默认为true
-            'fileSizeLimit': '30MB',                       //单个文件大小，0为无限制，可接受KB,MB,GB等单位的字符串值
-            //'fileType': "file",  //上传的文件筛选后缀过滤器 如果限制图片类型可以用 image/*)
-            'fileType':[
-                //"application/pdf",
-                //"application/msword",
-                //"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                "application/vnd.ms-excel",
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                //"application/vnd.ms-powerpoint",
-                //"application/vnd.openxmlformats-officedocument.presentationml.presentation",
-                //"application/zip",
-                //"application/x-rar-compressed",
-            ],//限制允许上传的后缀
+<link th:href="@{/asserts/css/bootstrap.min.css}" rel="stylesheet"> <!-- 引入导入的 4.0.0 不兼容 ，用他自己的把-->
+<link th:href="@{/asserts/css/style.min.css}" rel="stylesheet">
 
-            'uploadScript': "${ctx}/databasic/upload",  //文件上传的地址
-            'formData': {}, //传递的参数
-            //开始上传
-            "onUpload": function (file) {
-                //开始上传事件
-            },
-            'onUploadComplete': function (file, data) {
-                //上传结束事件
-                if(typeof(data) == "undefined"){
-                    alert('上传失败！');
-                }else{
-                    data = eval('('+data+')');
-                    console.log(file);
-                    var filePath = data.filePath;
-                    var fileName = file.name;
-                    var type=file.type;
-                    filee=fileName.substring(fileName.lastIndexOf('.'));
-                    console.log(filee);
-                    $("#filePath").val(filePath);
-                    //alert('上传成功！');
-                }
-            }
-        });
+<script type="text/javascript" th:src="@{/plus/zDialog/zDialog.js}"></script>
+<script type="text/javascript" th:src="@{/plus/zDialog/zDrag.js}"></script>
 
+<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
 
+<!-- 文件上传插件-->
+<script type="text/javascript" th:href="@{/plus/uploadifive/jquery-3.3.1.min.js}"></script>
+<link rel="stylesheet" th:href="@{/plus/uploadifive/uploadifive.css}" />
+<script type="text/javascript" th:href="@{/plus/uploadifive/jquery.uploadifive.js}"></script>
 
-    });
-    /*var filee;
-	$(document).ready(function(e) {
-		$('#uploads').uploadify({
-		     'swf':'${ctx}/res/jslib/Uploadify/uploadify.swf',
-		     'uploader':'${ctx}/databasic/upload',
-		     'auto': true,
-		     'fileTypeExts': '*.xlsx;*.xls',
-		     'fileTypeDesc': 'Excel（.xlsx）',
-		     'buttonText':'选择文件',
-		     'method':'post',
-		     'multi': false,
-		     'removeTimeout':3600,
-		     'onUploadSuccess': function(file,data,respone){//每个文件即将上传前触发
-		    	if(typeof(data) == "undefined"){
-		    		alert('上传失败！');
-		    	}else{
-		    		data = eval('('+data+')');
-		      		var filePath = data.filePath;
-		      		filee=file.type;
-		     		$("#filePath").val(filePath);
-
-		     		//alert('上传成功！');
-		    	}
-		     }
-		});
-
-	//上传文件
-
-
-});*/
-
-    function btnUploadsss(){
-        var  filePath= $("#filePath").val();
-        if(filePath==''){
-            Dialog.alert('请选择导入文件！',function(){Dialog.close();});
-            return;
-        }
-        $.ajax({
-            type : "POST",
-            url : '${ctx}/tjsnbgWscl/file-upload',
-            data : {"filePath":filePath,"filee":filee,"collectYear":"${collectYear}"},
-            async : false,
-            dataType:"json",
-            success : function(data) {
-                if(data.data.map =="1"){
-                    Dialog.alert('文件格式不对',function(){Dialog.close();});
-                }else if(data.data.map =="2"){
-                    Dialog.alert('导入模板不匹配',function(){Dialog.close();});
-                }else if(data.data.map =="3"){
-                    Dialog.alert('导入文件与模板不匹配',function(){Dialog.close();});
-                }else{
-                    shoee(data.data);
-
-                }
-            },
-            error:function (data) {
-                Dialog.alert('导入失败',function(){Dialog.close();});
-            }
-        });
-    }
-    function shoee(data){
-        $("#uploadingId").hide();
-        $("#forlogin").show();
-        $("#butUpload").hide();
-        var _content = "";
-        var total=data.countNum;
-        var succeed=data.okNum;
-        var failure=data.failNum;
-        $("#total_build_num").html(total);
-        $("#total_no_build_num").html(succeed);
-        $("#total_relocated").html(failure);
-        var  arr=data.failInfo.msg.split("_");
-        for(var i=0 ; i<arr.length; i++)  {
-            _content += '<tr><td>'+arr[i]+'</td></tr>';
-        }
-
-        $("#mortgage-list").html(_content);
-        if(parseInt(failure)>0){
-            Dialog.alert('存在'+failure+'个错误数据，已取消本次导入，请修改后重新导入');
-        }
-    }
-</script>
 <body>
+
+    <form enctype="multipart/form-data" method="post" th:action="@{/subway/uploadExcel}">
+        <li style="margin-top: 15px;">
+            选择文件:
+        </li>
+        <input type="file" name="file" /> <input type="submit" value="上传" />
+    </form>
+
 
 </body>
 </html>

@@ -11,4 +11,16 @@ public interface SubwayMapper {
      * @return
      */
     List<Subway> getPageSubway();
+
+    /**
+     * 导入 excel 数据到数据库
+     * @param subway
+     */
+    void importSubway(Subway subway);
+
+    /**
+     * 查询数据
+     * @return
+     */
+    List<Subway> getQuerySubway();
 }

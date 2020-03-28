@@ -19,6 +19,10 @@
         <nav class="sidebar-main">
             <ul class="nav nav-drawer">
                 <li class="nav-item active"> <a th:href="@{/main}"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+                <li> <a href="#" th:href="@{/user/list}"><i class="mdi mdi-account"></i>用户管理</a> </li>
+                <li> <a th:href="@{/subway/list}"><i class="mdi mdi-database"></i>数据数据</a> </li>
+                <li> <a th:href="@{/subway/query}"><i class="mdi mdi-chart-bar-stacked"></i>查询导出</a> </li>
+                <!--
                 <li class="nav-item nav-item-has-subnav">
                     <a href="javascript:void(0)"><i class="mdi mdi-palette"></i>系统管理</a>
                     <ul class="nav nav-subnav">
@@ -33,6 +37,7 @@
                         <li> <a th:href="@{/subway/list}">监管数据</a> </li>
                     </ul>
                 </li>
+                -->
             </ul>
         </nav>
 

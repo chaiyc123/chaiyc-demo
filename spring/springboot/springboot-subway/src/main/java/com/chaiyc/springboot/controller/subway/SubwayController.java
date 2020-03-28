@@ -28,4 +28,18 @@ public class SubwayController {
         model.addAttribute("url","/subway/list");
         return "subway/subway_list";
     }
+
+    @GetMapping("/query")
+    public String query(Model model,
+                       @RequestParam(name = "pageNum", defaultValue = "1") int pageNo,
+                       @RequestParam(name = "page.size",defaultValue = "8") int pageSize){
+
+        PageInfo<Subway> pageInfo = subwayService.getPageSubway(pageNo,pageSize);
+
+        model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("url","/subway/list");
+        return "subway/subway_query";
+    }
+
+
 }

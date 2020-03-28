@@ -18,8 +18,8 @@ public class UserServiceImpl  implements UserService {
     UserMapper userMapper;
 
     @Override
-    public User getUserById () throws Exception {
-        return userMapper.getUserById();
+    public User getUserById (String dataId) throws Exception {
+        return userMapper.getUserById(dataId);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class UserServiceImpl  implements UserService {
     }
 
     @Override
-    public void deleteUserById(Integer id) throws Exception {
-        userMapper.deleteUserById(id);
+    public void deleteUserById(String dataId) throws Exception {
+        userMapper.deleteUserById(dataId);
     }
 
     @Override
@@ -52,6 +52,11 @@ public class UserServiceImpl  implements UserService {
         PageHelper.startPage(pageNo, pageSize);
         List<User> list = userMapper.getPageUser();
         return new PageInfo<User>(list);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userMapper.updateUser(user);
     }
 
 }

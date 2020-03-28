@@ -9,14 +9,12 @@
   <link th:href="@{/asserts/css/materialdesignicons.min.css}" rel="stylesheet">
   <link th:href="@{/asserts/css/style.min.css}" rel="stylesheet">
 
-  <!--对话框-->
-  <link rel="stylesheet" th:href="@{/asserts/js/jconfirm/jquery-confirm.min.css}">
 
   <!--添加异步 上传 的js  支持加载-->
   <script th:href="@{/plus/AjaxFileUpload/ajaxfileupload.js}"></script>
-  <script type="text/javascript" th:src="@{/asserts/js/jquery.min.js}"></script>
+  <!--<script type="text/javascript" th:src="@{/asserts/js/jquery.min.js}"></script>-->
 
-  <!--<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>-->
+  <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
 
   <script type="text/javascript" th:src="@{/asserts/js/bootstrap.min.js}"></script>
   <script type="text/javascript" th:src="@{/asserts/js/perfect-scrollbar.min.js}"></script>
@@ -24,11 +22,6 @@
 
   <script type="text/javascript" th:src="@{/plus/zDialog/zDialog.js}"></script>
   <script type="text/javascript" th:src="@{/plus/zDialog/zDrag.js}"></script>
-
-
-  <!--对话框-->
-  <script th:src="@{/asserts/js/jconfirm/jquery-confirm.min.js}"></script>
-  <script type="text/javascript" th:src="@{/asserts/js/main.min.js}"></script>
 </head>
 
 <style>
@@ -63,15 +56,41 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-toolbar clearfix">
-                <div class="toolbar-btn-action">
-                  <a class="btn btn-primary m-r-5" href="#!"><i class="mdi mdi-plus"></i> 新增</a>
-                  <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>
+                <form class="pull-left search-bar" method="get" action="#!" role="form">
+                  <div class="input-group">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default dropdown-toggle" id="aa-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                        <span style="font-weight: bold">检查人姓名</span>
+                      </button>
+                    </div>
+                    <input type="text" class="form-control" style="width: 256px; margin-right: 20px;" value="" name="keyword" placeholder="请输入检查人姓名">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default dropdown-toggle" id="search-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                        <span style="font-weight: bold">检查站点</span>
+                      </button>
+                    </div>
+                    <input type="text" class="form-control" value="" style="width: 256px" name="keyword" placeholder="请输入检查站点">
+                  </div>
+                  <div class="input-group" style="margin-top: 20px;">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default dropdown-toggle" id="aa-btna" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                        <span style="font-weight: bold">导入时间起</span>
+                      </button>
+                    </div>
+                    <input type="text" class="form-control" style="width: 256px; margin-right: 20px;" value="" name="keyword" placeholder="请输入检查人姓名">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default dropdown-toggle" id="search-btna" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                        <span style="font-weight: bold">导入时间止</span>
+                      </button>
+                    </div>
+                    <input type="text" class="form-control" value="" style="width: 256px" name="keyword" placeholder="请输入检查站点">
+                  </div>
 
-                  <!--<input type="file" id="file" name="file" class="layui-btn" onchange ="uploadFile(this)" ></input>-->
-
-                  <button class="btn btn-info" id="importBtb" data-toggle="modal" data-target="#gridSystemModal"><i class="mdi mdi-window-open"></i> 导入</button>
-
-                  <button class="btn btn-success" id="templateDown"><i class="mdi mdi-window-restore"></i> 下载模板</button>
+                </form>
+                <div class="toolbar-btn-action" style="float: right">
+                  <button class="btn btn-info" id="queryBtb"><i class="mdi mdi-window-maximize"></i> 查询</button>
+                  <button class="btn btn-danger" id="resetBtb"><i class="mdi mdi-window-restore"></i> 重置</button>
+                  <button class="btn btn-success" id="exportBtb"><i class="mdi mdi-window-closed"></i> 导出</button>
                 </div>
               </div>
               <div class="card-body">
@@ -127,18 +146,13 @@
 
       </div>
 
-      <!--导入弹窗-->
-      <div th:replace="~{commons/import::import}"></div>
-
     </main>
     <!--End 页面主要内容-->
   </div>
 </div>
 
 
-
-
-<script type="text/javascript" th:inline="javascript">
+<script type="text/javascript">
 
   $(function(){
     $('.search-bar .dropdown-menu a').click(function() {
@@ -148,54 +162,17 @@
     });
   });
 
-  //下载模板
-  $("#templateDown").on("click",function(){
-      var dowUrl = "/subway/subway/templateDownload";
+  // 导出excel
+  $("#exportBtb").on("click",function(){
+
+      // 可以带参数
+
+      var dowUrl = "/subway/subway/upload";
       window.open(dowUrl);
   });
 
 
 
-  function uploadFile(file){
-    //('正在上传，请稍候',{icon: 16,time:false,shade:0.8});
-
-    $.ajaxFileUpload({
-      url : '/subway/subway/uploadExcel', //用于文件上传的服务器端请求地址
-      secureuri : false, //一般设置为false
-      fileElementId : 'file', //文件上传空间的id属性  <input type="file" id="file" name="file" />
-      type : 'post',
-      dataType : 'text', //返回值类型 一般设置为
-      success : function(result){ //服务器成功响应处理函数
-        var result = $.parseJSON(result.replace(/<.*?>/ig,""));
-        alert(result.msg);
-      },
-      error : function(result){//服务器响应失败处理函数
-
-      }
-    });
-    return false;
-  }
-
-
-  // 进入导入页面
-  /*$("#importBtb").on("click",function(){
-
-    dialogfillTree = new Dialog({
-      Animator: true,
-      URL: "/subway/subway/toImportDialog",
-      Width: 400,
-      Height: 300,
-      Title: '导入数据'
-    });
-    dialogfillTree.CancelEvent =function() {
-
-      dialogfillTree.close();
-      //重新加载页面
-      window.location.href = "/subway/subway/list";
-    };
-    dialogfillTree.show();
-
-  });*/
 
 </script>
 </body>
