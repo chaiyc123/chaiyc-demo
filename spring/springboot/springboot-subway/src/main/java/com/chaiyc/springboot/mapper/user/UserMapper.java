@@ -37,4 +37,10 @@ public interface UserMapper {
      * @param user
      */
     void updateUser(User user);
+
+    /**
+     * 查询首页数据
+     * @return
+     */
+    List<String> CountMainInfo(String currentDate);
 }

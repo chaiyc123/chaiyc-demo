@@ -71,6 +71,7 @@
                   </div>
 
                   <!--隐藏字段-->
+                  <input type="hidden" name="loginPassword" th:if="${user!=null}" th:value="${user.loginPassword}">
                   <input type="hidden" name="userBirthday" th:if="${user!=null}" th:value="${user.userBirthday}">
                   <input type="hidden" name="userIdentityCode" th:if="${user!=null}" th:value="${user.userIdentityCode}">
                   <input type="hidden" name="userAddress" th:if="${user!=null}" th:value="${user.userAddress}">

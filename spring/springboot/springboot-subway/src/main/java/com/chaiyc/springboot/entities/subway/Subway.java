@@ -6,7 +6,7 @@ package com.chaiyc.springboot.entities.subway;
 
 public class Subway {
 
-    private Integer dataId;             //主键
+    private String dataId;             //主键
 
     private String checkName;           //检查人姓名
     private String checkPhone;          //检查人电话
@@ -14,11 +14,31 @@ public class Subway {
     private String remark;              //备注
     private String createTime;          //创建时间
 
-    public Integer getDataId() {
+    private String startDate;      //查询的 开始时间
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    private String endDate;        //查询的 结束时间
+
+    public String getDataId() {
         return dataId;
     }
 
-    public void setDataId(Integer dataId) {
+    public void setDataId(String dataId) {
         this.dataId = dataId;
     }
 

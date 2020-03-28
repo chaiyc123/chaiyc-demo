@@ -12,16 +12,21 @@
 
   <!--添加异步 上传 的js  支持加载-->
   <script th:href="@{/plus/AjaxFileUpload/ajaxfileupload.js}"></script>
-  <!--<script type="text/javascript" th:src="@{/asserts/js/jquery.min.js}"></script>-->
+  <script type="text/javascript" th:src="@{/asserts/js/jquery.min.js}"></script>
 
-  <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
+  <!--<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>-->
 
   <script type="text/javascript" th:src="@{/asserts/js/bootstrap.min.js}"></script>
   <script type="text/javascript" th:src="@{/asserts/js/perfect-scrollbar.min.js}"></script>
+
+  <!--日期选择插件-->
+  <link rel="stylesheet" th:href="@{/asserts/js/bootstrap-datepicker/bootstrap-datepicker3.min.css}">
+  <script th:src="@{/asserts/js/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+  <script th:src="@{/asserts/js/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js}"></script>
+
   <script type="text/javascript" th:src="@{/asserts/js/main.min.js}"></script>
 
-  <script type="text/javascript" th:src="@{/plus/zDialog/zDialog.js}"></script>
-  <script type="text/javascript" th:src="@{/plus/zDialog/zDrag.js}"></script>
+
 </head>
 
 <style>
@@ -53,37 +58,37 @@
       <div class="container-fluid">
 
         <div class="row">
+
           <div class="col-lg-12">
             <div class="card">
               <div class="card-toolbar clearfix">
-                <form class="pull-left search-bar" method="get" action="#!" role="form">
+                <form class="pull-left search-bar" id="submitForm" method="get" action="#!" role="form">
                   <div class="input-group">
                     <div class="input-group-btn">
-                      <button class="btn btn-default dropdown-toggle" id="aa-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                      <span class="btn btn-default dropdown-toggle" id="aa-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
                         <span style="font-weight: bold">检查人姓名</span>
-                      </button>
+                      </span>
                     </div>
-                    <input type="text" class="form-control" style="width: 256px; margin-right: 20px;" value="" name="keyword" placeholder="请输入检查人姓名">
+                    <input type="text" class="form-control" style="width: 256px; margin-right: 20px;" value="" th:value="${subway !=null}?${subway.checkName}" id="checkName" name="checkName" placeholder="请输入检查人姓名">
                     <div class="input-group-btn">
                       <button class="btn btn-default dropdown-toggle" id="search-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
                         <span style="font-weight: bold">检查站点</span>
                       </button>
                     </div>
-                    <input type="text" class="form-control" value="" style="width: 256px" name="keyword" placeholder="请输入检查站点">
+                    <input type="text" class="form-control" value="" style="width: 256px" th:value="${subway !=null}?${subway.checkStation}" id="checkStation" name="checkStation" placeholder="请输入检查站点">
                   </div>
-                  <div class="input-group" style="margin-top: 20px;">
-                    <div class="input-group-btn">
-                      <button class="btn btn-default dropdown-toggle" id="aa-btna" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
-                        <span style="font-weight: bold">导入时间起</span>
-                      </button>
+
+                  <div class="col-lg-12" style="width:700px; padding: 0; margin: 20px 0px; z-index: 100">
+                    <div class="card" style="box-shadow:0 0 0;padding: 0; margin: 0;display: flex; flex-direction: row;">
+                      <div class="card-header" style="width: 100px;border-bottom:0;padding: 8px 15px;"><h4 style="font-weight: bold;color: #8b95a5;">选择日期:</h4></div>
+                      <div class="card-body" style="width: 500px;padding: 0; margin: 0;z-index: 100">
+                        <div style="z-index: 100" class="input-daterange input-group">
+                          <input style="z-index: 100" class="form-control js-datepicker" data-date-format="yyyy-mm-dd" type="text" th:value="${subway !=null}?${subway.startDate}" id="startDate" name="startDate" placeholder="从">
+                          <span class="input-group-addon"><i class="mdi mdi-chevron-right"></i></span>
+                          <input class="form-control js-datepicker" data-date-format="yyyy-mm-dd" type="text" th:value="${subway !=null}?${subway.endDate}" id="endDate" name="endDate" placeholder="至">
+                        </div>
+                      </div>
                     </div>
-                    <input type="text" class="form-control" style="width: 256px; margin-right: 20px;" value="" name="keyword" placeholder="请输入检查人姓名">
-                    <div class="input-group-btn">
-                      <button class="btn btn-default dropdown-toggle" id="search-btna" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
-                        <span style="font-weight: bold">导入时间止</span>
-                      </button>
-                    </div>
-                    <input type="text" class="form-control" value="" style="width: 256px" name="keyword" placeholder="请输入检查站点">
                   </div>
 
                 </form>
@@ -162,14 +167,32 @@
     });
   });
 
+  //查询
+  $("#queryBtb").on("click",function(){
+      $("#submitForm").submit();
+  });
+
+  //重置
+  $("#resetBtb").on("click",function(){
+    $("#submitForm").find('input[type=text],select,input[type=hidden]').each(function() {
+      $(this).val('');
+      $("#submitForm").submit();
+    });
+  });
+
   // 导出excel
   $("#exportBtb").on("click",function(){
-
       // 可以带参数
 
-      var dowUrl = "/subway/subway/upload";
+      var checkName = $("#checkName").val();
+      var checkStation = $("#checkStation").val();
+      var startDate = $("#startDate").val();
+      var endDate = $("#endDate").val();
+
+      var dowUrl = "/subway/subway/upload?checkName="+checkName + "&checkStation=" + checkStation + "&startDate=" + startDate + "&endDate=" + endDate;
       window.open(dowUrl);
   });
+
 
 
 

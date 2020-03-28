@@ -83,15 +83,6 @@ public class UserController {
     }
 
     /**
-     * 修改用户
-     */
-    @PutMapping("/update")
-    public String update(User user) throws  Exception{
-        userService.saveUpdate(user);
-        return "redirect:/user/list";
-    }
-
-    /**
      * 删除用户
      */
     @RequestMapping("/delete")

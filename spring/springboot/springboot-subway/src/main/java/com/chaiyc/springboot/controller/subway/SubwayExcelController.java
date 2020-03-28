@@ -176,9 +176,20 @@ public class SubwayExcelController {
     @RequestMapping("/upload")
     public String upload(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
+        String checkName = request.getParameter("checkName");
+        String checkStation = request.getParameter("checkStation");
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+
+        Subway subway = new Subway();
+        subway.setCheckName(checkName);
+        subway.setCheckStation(checkStation);
+        subway.setStartDate(startDate);
+        subway.setEndDate(endDate);
+
         String filePath = new ClassPathResource("static/excel_templates/subway.xls").getFile().getPath();
 
-        List<Subway> list = subwayService.getQuerySubway();
+        List<Subway> list = subwayService.getQuerySubway(subway);
 
         Workbook wb = fillExcelDataWithTemplate(list,filePath);
 

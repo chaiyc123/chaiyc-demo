@@ -5,17 +5,39 @@
 <mapper namespace="com.chaiyc.springboot.mapper.subway.SubwayMapper">
 
     <select id="getPageSubway" resultType="com.chaiyc.springboot.entities.subway.Subway">
-        select * from T_SUBWAY order by createTime asc
-    </select>
-
-    <select id="getQuerySubway" resultType="com.chaiyc.springboot.entities.subway.Subway">
         select * from T_SUBWAY order by createTime desc
     </select>
 
-    <insert id="importSubway" parameterType="com.chaiyc.springboot.entities.subway.Subway">
+    <select id="getQueryPageSubway" resultType="com.chaiyc.springboot.entities.subway.Subway">
+        select * from T_SUBWAY
+            <where>
+                <if test="checkName!=null and checkName!=''">
+                    checkName like '%${checkName}%'
+                </if>
+                <if test="checkStation!=null and checkStation!=''">
+                    and checkStation like '%${checkStation}%'
+                </if>
+                <if test="startDate!=null and startDate!=''">
+                    and createTime &gt;= #{startDate}
+                </if>
+                <if test="endDate!=null and endDate!=''">
+                    and createTime &lt; #{endDate}
+                </if>
+            </where>
+            order by createTime desc
+    </select>
+
+
+    <insert id="saveSubway" parameterType="com.chaiyc.springboot.entities.subway.Subway">
         insert into T_SUBWAY(checkName,checkPhone,checkStation,remark,createTime)
             values
             ( #{checkName}, #{checkPhone}, #{checkStation}, #{remark}, #{createTime})
     </insert>
+
+    <update id="updateUser" parameterType="com.chaiyc.springboot.entities.subway.Subway">
+        update T_SUBWAY set  checkName=#{checkName},checkPhone=#{checkPhone},
+            checkStation=#{checkStation},remark=#{remark},createTime=#{createTime}
+            where dataId=#{dataId}
+    </update>
 
 </mapper>

@@ -44,6 +44,17 @@
         SELECT * FROM T_USER order by create_Time desc
     </select>
 
+    <!--查询首页数据-->
+    <select id="CountMainInfo" resultType="map">
+        select * from(
+            (select count(*) as userTotal from t_user) as us,
+            (select count(*) as subwayTotal from t_subway) as sub,
+            (select count(*) as todayNum from t_subway
+                where createTime like '%${currentDate}%'
+            ) as today
+        ) where  1=1
+    </select>
+
     <insert id="saveUser" parameterType="com.chaiyc.springboot.entities.user.User">
         insert into T_USER (user_Name,user_Sex, user_Birthday,user_Identity_Code,user_Address,
                     user_Tele, user_Email, login_Account, login_Password, user_State, create_Time )

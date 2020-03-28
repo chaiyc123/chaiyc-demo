@@ -34,7 +34,7 @@ public interface UserService {
 
     /**
      * 通过id删除用户
-     * @param id
+     * @param dataId
      */
     void deleteUserById(String dataId) throws Exception;;
 
@@ -53,4 +53,10 @@ public interface UserService {
      * @param user
      */
     void updateUser(User user);
+
+    /**
+     * 查询首页的数据
+     * @return
+     */
+    List<String> CountMainInfo(String currentDate);
 }

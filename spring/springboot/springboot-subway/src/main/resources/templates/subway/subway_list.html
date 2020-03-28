@@ -64,8 +64,8 @@
             <div class="card">
               <div class="card-toolbar clearfix">
                 <div class="toolbar-btn-action">
-                  <a class="btn btn-primary m-r-5" href="#!"><i class="mdi mdi-plus"></i> 新增</a>
-                  <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>
+                  <a class="btn btn-primary m-r-5" href="#!" th:href="@{/subway/edit}"><i class="mdi mdi-plus"></i> 新增</a>
+                  <a class="btn btn-danger" href="#!" id="delete"><i class="mdi mdi-window-close"></i> 删除</a>
 
                   <!--<input type="file" id="file" name="file" class="layui-btn" onchange ="uploadFile(this)" ></input>-->
 
@@ -97,7 +97,7 @@
                     <tr th:each="subway:${pageInfo.list}">
                       <td>
                         <label class="lyear-checkbox checkbox-primary">
-                          <input type="checkbox" name="ids[]" value="1"><span></span>
+                          <input type="checkbox" class="check-row"  th:value="${subway.dataId}" th:id="${subway.dataId}" value="1"><span></span>
                         </label>
                       </td>
                       <td th:text="${subwayStat.index}"></td>
@@ -107,8 +107,8 @@
                       <td th:text="${subway.remark}"></td>
                       <td>
                         <div class="btn-group">
-                          <a class="btn btn-xs btn-default" href="#!" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                          <a class="btn btn-xs btn-default" href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                          <a class="btn btn-xs btn-default" href="#!" th:href="@{/subway/edit(dataId=${subway.dataId})}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                          <a class="btn btn-xs btn-default" href="#!" th:href="@{/subway/delete(dataId=${subway.dataId})}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                         </div>
                       </td>
                     </tr>
@@ -154,7 +154,26 @@
       window.open(dowUrl);
   });
 
+  // 批量删除
+  $("#delete").on("click",function(){
+    var dataIds = "";
 
+    $(".check-row:checked").each(function(){
+      dataIds += $(this).attr("id") + ",";
+    });
+
+    if(dataIds != ""){
+      dataIds = dataIds.substring(0, dataIds.length - 1);
+    }
+    if(dataIds != ""){
+      var flag = confirm("您确认要删除选中数据吗？");
+      if(flag == true){
+        window.location.href="/subway/subway/delete?dataId=" + dataIds ;
+      }
+    }else{
+      alert("请您至少选择一条数据!")
+    }
+  });
 
   function uploadFile(file){
     //('正在上传，请稍候',{icon: 16,time:false,shade:0.8});

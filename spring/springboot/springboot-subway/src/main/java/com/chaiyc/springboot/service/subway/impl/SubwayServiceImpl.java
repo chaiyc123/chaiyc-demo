@@ -25,11 +25,37 @@ public class SubwayServiceImpl implements SubwayService {
 
     @Override
     public void importSubway(Subway subway) {
-        subwayMapper.importSubway(subway);
+        subwayMapper.saveSubway(subway);
     }
 
     @Override
-    public List<Subway> getQuerySubway() {
-        return subwayMapper.getQuerySubway();
+    public List<Subway> getQuerySubway(Subway subway) {
+        return subwayMapper.getQueryPageSubway(subway);
+    }
+
+    @Override
+    public void saveSubway(Subway subway) {
+        subwayMapper.saveSubway(subway);
+    }
+
+    @Override
+    public void updateUser(Subway subway) {
+        subwayMapper.updateUser(subway);
+    }
+
+    @Override
+    public Subway getSubwayById(String dataId) {
+        return subwayMapper.getSubwayById(dataId);
+    }
+
+    @Override
+    public void deleteSubwayById(String dataId) {
+        subwayMapper.deleteSubwayById(dataId);
+    }
+
+    @Override
+    public PageInfo<Subway> getQueryPageSubway(int pageNo, int pageSize, Subway subway) {
+        PageHelper.startPage(pageNo,pageSize);
+        return new PageInfo<Subway>(subwayMapper.getQueryPageSubway(subway));
     }
 }

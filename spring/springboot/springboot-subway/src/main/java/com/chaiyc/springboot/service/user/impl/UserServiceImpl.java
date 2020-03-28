@@ -59,4 +59,9 @@ public class UserServiceImpl  implements UserService {
         userMapper.updateUser(user);
     }
 
+    @Override
+    public List<String> CountMainInfo(String currentDate) {
+        return userMapper.CountMainInfo(currentDate);
+    }
+
 }
