@@ -8,8 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -61,7 +64,16 @@ public class UserLoginController {
             maps.put("msg","用户或密码错误！");
             return "login";
         }
+    }
 
+    @RequestMapping(value = "/login/loginOut")
+    public String loginOut(HttpServletRequest request, HttpServletResponse response) {
+        Object userSession = request.getSession().getAttribute("loginUser");
+        if (null != userSession) {
+            request.getSession().removeAttribute("loginUser");
+        }
+        request.getSession().invalidate();
+        return "login";
     }
 
 }
