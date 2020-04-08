@@ -1,4 +1,4 @@
-package com.chaiyc;
+package com.chaiyc._01_sort._01_Comparable;
 
 public class StudentTestComparable {
 
