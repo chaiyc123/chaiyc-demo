@@ -1,4 +1,4 @@
-package com.chaiyc._01_sort._01_Comparable;
+package _01_sort._01_Comparable;
 
 public class Student implements Comparable<Student>{
 

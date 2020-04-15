@@ -1,4 +1,4 @@
-package com.chaiyc._01_sort._02_BubbleSort;
+package _01_sort._02_BubbleSort;
 
 /**
  * 冒泡排序
