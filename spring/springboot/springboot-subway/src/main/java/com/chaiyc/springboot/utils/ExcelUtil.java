@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,11 +32,12 @@ public class ExcelUtil {
 		if (cell == null) {
 			return "";
 		} else {
-			if (cell.getCellType() == HSSFCell.CELL_TYPE_BOOLEAN) {
+			if (cell.getCellType() == HSSFCell.CELL_TYPE_BOOLEAN) {		//boolean
 				return String.valueOf(cell.getBooleanCellValue());
-			} else if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
-				return String.valueOf(cell.getNumericCellValue());
-			} else {
+			} else if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) { //数字
+				BigDecimal bd = new BigDecimal(cell.toString());
+				return bd.setScale(0,BigDecimal.ROUND_HALF_UP).toPlainString();
+			}else {
 				return String.valueOf(cell.getStringCellValue());
 			}
 		}

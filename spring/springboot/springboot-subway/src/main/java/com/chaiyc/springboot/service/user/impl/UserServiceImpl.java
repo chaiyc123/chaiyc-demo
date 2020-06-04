@@ -28,7 +28,6 @@ public class UserServiceImpl  implements UserService {
     @Override
     public User getUserById (String dataId) throws Exception {
         String key = "user_" + dataId;
-
         ValueOperations<String,User> operations = redisTemplate.opsForValue();
 
         Boolean hasKey = redisTemplate.hasKey(key);
@@ -61,14 +60,6 @@ public class UserServiceImpl  implements UserService {
     }
 
     /**
-     * 更新用户策略：先更新数据表，成功之后，删除原来的缓存，再更新缓存
-     */
-    @Override
-    public void saveUpdate(User user) throws Exception {
-        userMapper.saveUpdate(user);
-    }
-
-    /**
      * 删除用户策略：删除数据表中数据，然后删除缓存
      */
     @Override
@@ -97,9 +88,27 @@ public class UserServiceImpl  implements UserService {
         return new PageInfo<User>(list);
     }
 
+    /**
+     * 更新用户策略：先更新数据表，成功之后，删除原来的缓存，再更新缓存
+     */
     @Override
     public void updateUser(User user) {
-        userMapper.updateUser(user);
+        ValueOperations<String,User> operations = redisTemplate.opsForValue();
+
+        int result = userMapper.updateUser(user);
+        if(result != 0){
+            String key = "user_" + user.getUserAcctId();
+            boolean haskey = redisTemplate.hasKey(key);
+            if (haskey) {
+                //可以不用删除原来的key，因为再次更新缓存的时候，相同的key会把原来的值覆盖掉，养成好的编程习惯（删除一下之前的key键值对）
+                redisTemplate.delete(key);
+                System.out.println("删除缓存中的key=========>" + key);
+            }
+
+            // 再将更新后的数据加入缓存 ，
+            User userNew = userMapper.getUserById(user.getUserAcctId());
+            operations.set(key,userNew,5, TimeUnit.HOURS);
+        }
     }
 
     @Override

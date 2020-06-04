@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -83,7 +86,6 @@ public class SubwayExcelController {
      */
     @RequestMapping("/toImportDialog")
     public String toImportDialog(){
-
         return "subway/subway_import";
     }
 
@@ -100,7 +102,6 @@ public class SubwayExcelController {
     public String upload_excel(@RequestParam("file") MultipartFile file, HttpServletResponse response, HttpServletRequest request)throws Exception {
         JSONObject result = new JSONObject();
         String filePath = "";
-        System.out.println(file.getOriginalFilename());
 
         if(!file.isEmpty()){
             filePath = new ClassPathResource("static/excel_templates/subway.xls").getFile().getPath();
@@ -154,9 +155,9 @@ public class SubwayExcelController {
                     //去掉编码中的  .0 如果全是数字 后面有.0
 
                     Subway.setCheckName(ExcelUtil.formatCell(row.getCell(0)));
-                    Subway.setCheckPhone(ExcelUtil.formatCell(row.getCell(0)));
-                    Subway.setCheckStation(ExcelUtil.formatCell(row.getCell(0)));
-                    Subway.setRemark(ExcelUtil.formatCell(row.getCell(0)));
+                    Subway.setCheckPhone(ExcelUtil.formatCell(row.getCell(1)));
+                    Subway.setCheckStation(ExcelUtil.formatCell(row.getCell(2)));
+                    Subway.setRemark(ExcelUtil.formatCell(row.getCell(3)));
                     Subway.setCreateTime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
 
                     list.add(Subway);
@@ -226,9 +227,6 @@ public class SubwayExcelController {
                 row.createCell(2).setCellValue(subway.getCheckStation());
                 row.createCell(3).setCellValue(subway.getRemark());
                 row.createCell(4).setCellValue(subway.getCreateTime());
-
-
-
 
             }
         } catch (IOException e) {

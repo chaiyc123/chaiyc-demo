@@ -27,12 +27,6 @@ public interface UserService {
     void saveUser(User user) throws Exception;;
 
     /**
-     * 修改用户
-     * @param user
-     */
-    void saveUpdate(User user) throws Exception;;
-
-    /**
      * 通过id删除用户
      * @param dataId
      */

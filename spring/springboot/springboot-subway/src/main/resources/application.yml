@@ -28,7 +28,7 @@ spring:
       max-wait: -1
       max-idle: 8
       min-idle: 0
-    timeout: 0
+    timeout: 500
     password:       #密码默认为空
 
 
