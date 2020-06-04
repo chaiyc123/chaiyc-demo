@@ -1,18 +1,21 @@
-package com.chaiyc.springboot;
+package com.chaiyc.springboot.redis;
 
+import com.chaiyc.springboot.SpringbootSubwayApplication;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@SpringBootTest
-class SpringbootSubwayApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
+/**
+ * Redis 测试
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = SpringbootSubwayApplication.class)
+public class TestRedis {
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -25,4 +28,17 @@ class SpringbootSubwayApplicationTests {
         stringRedisTemplate.opsForValue().set("aaa","111");
         Assert.assertEquals("111",stringRedisTemplate.opsForValue().get("aaa"));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -3,13 +3,15 @@ package com.chaiyc.springboot.service.user.impl;
 import com.chaiyc.springboot.entities.user.User;
 import com.chaiyc.springboot.mapper.user.UserMapper;
 import com.chaiyc.springboot.service.user.UserService;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl  implements UserService {
@@ -17,9 +19,35 @@ public class UserServiceImpl  implements UserService {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    /**
+     * 获取用户策略：先从缓存中获取用户，没有则取数据表中 数据，再将数据写入缓存
+     */
     @Override
     public User getUserById (String dataId) throws Exception {
-        return userMapper.getUserById(dataId);
+        String key = "user_" + dataId;
+
+        ValueOperations<String,User> operations = redisTemplate.opsForValue();
+
+        Boolean hasKey = redisTemplate.hasKey(key);
+        if(hasKey){
+            User user = operations.get(key);
+            System.out.println("==========从缓存中获得数据=========");
+            System.out.println(user.getUserName());
+            System.out.println("==============================");
+            return user;
+        }else{
+            User user = userMapper.getUserById(dataId);
+            System.out.println("==========从数据表中获得数据=========");
+            System.out.println(user.getUserName());
+            System.out.println("==============================");
+
+            // 写入到缓存中
+            operations.set(key,user,5, TimeUnit.HOURS);
+            return user;
+        }
     }
 
     @Override
@@ -32,14 +60,29 @@ public class UserServiceImpl  implements UserService {
         userMapper.saveUser(user);
     }
 
+    /**
+     * 更新用户策略：先更新数据表，成功之后，删除原来的缓存，再更新缓存
+     */
     @Override
     public void saveUpdate(User user) throws Exception {
         userMapper.saveUpdate(user);
     }
 
+    /**
+     * 删除用户策略：删除数据表中数据，然后删除缓存
+     */
     @Override
     public void deleteUserById(String dataId) throws Exception {
-        userMapper.deleteUserById(dataId);
+        int result = userMapper.deleteUserById(dataId);
+        String key = "user_" + dataId;
+        if(result != 0){
+            Boolean hasKey = redisTemplate.hasKey(key);
+            if(hasKey){
+                //存在，则删除缓存中
+                redisTemplate.delete(key);
+                System.out.println("删除了缓存中的key：" + key);
+            }
+        }
     }
 
     @Override

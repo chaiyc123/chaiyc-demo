@@ -19,6 +19,19 @@ spring:
     password: root
     url: jdbc:mysql://127.0.0.1:3306/subway?characterEncoding=UTF-8
 
+  # redis 配置
+  redis:
+    host: 192.168.1.150
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+    password:       #密码默认为空
+
+
 # mybatis 配置
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml

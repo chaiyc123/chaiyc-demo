@@ -52,7 +52,7 @@
         </dependency>
 
 
-        <!-- 因为 mybatis 下面已经整合了 jdbc 所以不需要再添加jdbc 的依赖了-->
+        <!-- 因为 mybatis下面已经整合了 jdbc 所以不需要再添加jdbc 的依赖了-->
        <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -109,6 +109,19 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!--单元测试-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
     </dependencies>

@@ -26,7 +26,7 @@ public class SubwayController {
     @GetMapping("/list")
     public String list(Model model,
                        @RequestParam(name = "pageNum", defaultValue = "1") int pageNo,
-                       @RequestParam(name = "page.size",defaultValue = "8") int pageSize){
+                       @RequestParam(name = "page.size",defaultValue = "4") int pageSize){
 
         PageInfo<Subway> pageInfo = subwayService.getPageSubway(pageNo,pageSize);
 

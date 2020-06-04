@@ -9,6 +9,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * 项目web配置类
+ */
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
 

@@ -1,9 +1,11 @@
 package com.chaiyc.springboot.entities.user;
 
+import java.io.Serializable;
+
 /**
  * 用户信息实体类
  */
-public class User {
+public class User implements Serializable {
     private String userAcctId;         //账号id
     private String userName;		  //人员姓名
     private String userSex;           //性别 1男 2女

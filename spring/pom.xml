@@ -11,6 +11,7 @@
     <modules>
         <module>springboot</module>
         <module>spring-annotation</module>
+        <module>spring-study</module>
     </modules>
 
 

@@ -22,12 +22,12 @@ public interface UserMapper {
     List<User> getPageUser();
 
 
-    void saveUser(User user);
+    int saveUser(User user);
 
-    void saveUpdate(User user);
+    int saveUpdate(User user);
 
     @Delete("delete from T_USER where USER_ACCT_ID=#{dataId}")
-    void deleteUserById(String dataId);
+    int deleteUserById(String dataId);
 
     /*@Select("SELECT * FROM T_USER WHERE login_Account=#{username} and login_Password=#{password}")*/
     User login(String username, String password);
@@ -36,7 +36,7 @@ public interface UserMapper {
      * 修改用户
      * @param user
      */
-    void updateUser(User user);
+    int updateUser(User user);
 
     /**
      * 查询首页数据

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 通过id定义bean名称：user1
+    <bean id="user1" class="com.chaiyc.UserModel"/>
+
+    &lt;!&ndash; 通过name定义bean名称：user2 &ndash;&gt;
+    <bean name="user2" class="com.chaiyc.UserModel"/>
+
+    &lt;!&ndash; id为名称，name为别名；bean名称：user3，1个别名：[user3_1] &ndash;&gt;
+    <bean id="user3" name="user3_1" class="com.chaiyc.UserModel"/>
+
+    &lt;!&ndash; bean名称：user4，多个别名：[user4_1,user4_2,user4_3,user4_4] &ndash;&gt;
+    <bean id="user4" name="user4_1,user4_2;user4_3 user4_4" class="com.chaiyc.UserModel"/>
+
+    &lt;!&ndash; bean名称：user5，别名：[user5_1,user5_2,user5_3,user5_4] &ndash;&gt;
+    <bean name="user5,user5_1,user5_2;user5_3 user5_4" class="com.chaiyc.UserModel"/>
+
+    &lt;!&ndash;静态工厂方法创建bean&ndash;&gt;
+    <bean id="staticFactoryMethod1" class="com.chaiyc.factory.UserStaticFactory"
+        factory-method="buildUser1"></bean>
+
+    <bean id="staticFactoryMethod2" class="com.chaiyc.factory.UserStaticFactory"
+        factory-method="buildUser2">
+        <constructor-arg name="name" value="通过工厂静态有参方法创建UerModel实例对象"></constructor-arg>
+        <constructor-arg name="age" value="28"></constructor-arg>
+    </bean>
+
+    &lt;!&ndash;定义一个实例工厂&ndash;&gt;
+    <bean id="userFactory" class="com.chaiyc.factory.UserFactory"></bean>
+
+    &lt;!&ndash;实例工厂方法创建bean对象&ndash;&gt;
+    <bean id="createBeanByBeanMethod1" factory-bean="userFactory" factory-method="buildUser1"></bean>
+    <bean id="createBeanByBeanMethod2" factory-bean="userFactory" factory-method="buildUser2">
+        <constructor-arg name="name" value="通过bean实例有参方法创建UserModel实例对象"></constructor-arg>
+        <constructor-arg name="age" value="28"></constructor-arg>
+    </bean>-->
+
+    <bean id="serviceA" class="com.chaiyc.factory.SettBean$ServiceA" autowire-candidate="false"></bean>
+    <bean id="serviceB" class="com.chaiyc.factory.SettBean$ServiceB" lazy-init="true"></bean>
+
+    <bean id="setterBean" class="com.chaiyc.factory.SettBean" autowire="byType" lazy-init="true"></bean>
+
+</beans>
