@@ -102,7 +102,7 @@ public class UserServiceImpl  implements UserService {
             if (haskey) {
                 //可以不用删除原来的key，因为再次更新缓存的时候，相同的key会把原来的值覆盖掉，养成好的编程习惯（删除一下之前的key键值对）
                 redisTemplate.delete(key);
-                System.out.println("删除缓存中的key=========>" + key);
+                System.out.println("数据跟新删除缓存中的key=========>" + key);
             }
 
             // 再将更新后的数据加入缓存 ，

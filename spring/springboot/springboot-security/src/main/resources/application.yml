@@ -1,0 +1,12 @@
+spring:
+  #配置数据链接
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/subway?characterEncoding=UTF-8
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true     #驼峰命名法，若不添加此配置，查数据会报错
+
