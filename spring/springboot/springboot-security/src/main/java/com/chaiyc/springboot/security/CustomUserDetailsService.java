@@ -37,6 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private SysUserRoleService userRoleService;
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
